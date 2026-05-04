@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ * Licensed to The Apereo Foundation under one or more contributor license
+ * agreements. See the NOTICE file distributed with this work for
+ * additional information regarding copyright ownership.
+ *
+ * The Apereo Foundation licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at:
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ -->
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+	<display-name>
+		UniTime
+	</display-name>
+	<absolute-ordering/>
+	
+	<description>
+		University Timetabling Application
+	</description>
+	
+	<welcome-file-list>
+		<welcome-file>
+			index.jsp
+		</welcome-file>
+	</welcome-file-list>
+	
+	
+	<!-- Error Pages -->
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/error.jsp</location>
+	</error-page>
+
+    <session-config>
+        <session-timeout>45</session-timeout>
+    </session-config>
+
+	<!-- Sprint Servlets -->
+	<servlet>
+		<servlet-name>gwt-dispatcher</servlet-name>
+		<servlet-class>org.unitime.timetable.spring.gwt.GwtDispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet>
+    	<servlet-name>calendarServlet</servlet-name>
+    	<servlet-class>org.unitime.timetable.gwt.server.CalendarServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+    	<servlet-name>patternServlet</servlet-name>
+    	<servlet-class>org.unitime.timetable.gwt.server.PatternServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+    	<servlet-name>gwtRpcServlet</servlet-name>
+    	<servlet-class>org.unitime.timetable.gwt.command.server.GwtRpcServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+    	<servlet-name>uploadServlet</servlet-name>
+    	<servlet-class>org.unitime.timetable.gwt.server.UploadServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+    	<servlet-name>exportServlet</servlet-name>
+    	<servlet-class>org.unitime.timetable.export.ExportServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>queueOutputServlet</servlet-name>
+        <servlet-class>org.unitime.timetable.util.queue.QueueOutputFileServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>taskOutputServlet</servlet-name>
+        <servlet-class>org.unitime.timetable.server.script.TaskOutputFileServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+    	<servlet-name>remoteLogging</servlet-name>
+    	<servlet-class>org.unitime.timetable.gwt.server.UniTimeRemoteLoggingService</servlet-class>
+    </servlet>
+    
+    <servlet>
+    	<servlet-name>roomPictureServlet</servlet-name>
+    	<servlet-class>org.unitime.timetable.server.rooms.RoomPictureServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+    	<servlet-name>apiServlet</servlet-name>
+    	<servlet-class>org.unitime.timetable.api.ApiServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+    	<servlet-name>mapServlet</servlet-name>
+    	<servlet-class>org.unitime.timetable.server.rooms.StaticMapServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+    	<servlet-name>GWT</servlet-name>
+    	<jsp-file>/gwt.jsp</jsp-file>
+    </servlet>
+        
+    <servlet-mapping>
+        <servlet-name>gwt-dispatcher</servlet-name>
+        <url-pattern>*.gwt</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>calendarServlet</servlet-name>
+      <url-pattern>/calendar</url-pattern>
+    </servlet-mapping>
+	
+    <servlet-mapping>
+    	<servlet-name>gwtRpcServlet</servlet-name>
+    	<url-pattern>/unitime/gwt.rpc</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>patternServlet</servlet-name>
+      <url-pattern>/pattern</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+    	<servlet-name>roomPictureServlet</servlet-name>
+    	<url-pattern>/picture</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>uploadServlet</servlet-name>
+      <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>exportServlet</servlet-name>
+      <url-pattern>/export</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>queueOutputServlet</servlet-name>
+      <url-pattern>/qpfile</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>taskOutputServlet</servlet-name>
+      <url-pattern>/taskfile</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>apiServlet</servlet-name>
+      <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>mapServlet</servlet-name>
+      <url-pattern>/maps</url-pattern>
+    </servlet-mapping>
+
+	<!-- Servlet Mappings -->
+	<servlet-mapping>
+		<servlet-name>remoteLogging</servlet-name>
+		<url-pattern>/unitime/remote_logging</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+    	<servlet-name>GWT</servlet-name>
+    	<url-pattern>*.p</url-pattern>
+    	<url-pattern>*.page</url-pattern>
+    	<url-pattern>/curricula</url-pattern>
+    	<url-pattern>/curprojrules</url-pattern>
+    	<url-pattern>/sectioning</url-pattern>
+    	<url-pattern>/requests</url-pattern>
+    	<url-pattern>/admin</url-pattern>
+    	<url-pattern>/events</url-pattern>
+    	<url-pattern>/timetable</url-pattern>
+    	<url-pattern>/roomtable</url-pattern>
+    	<url-pattern>/reservation</url-pattern>
+    	<url-pattern>/courseOffering</url-pattern>
+    	<url-pattern>/reservations</url-pattern>
+    	<url-pattern>/sectioningtest</url-pattern>
+    	<url-pattern>/hql</url-pattern>
+    	<url-pattern>/onlinesctdash</url-pattern>
+    	<url-pattern>/batchsctdash</url-pattern>
+    	<url-pattern>/traveltimes</url-pattern>
+    	<url-pattern>/classes</url-pattern>
+    	<url-pattern>/exams</url-pattern>
+    	<url-pattern>/personal</url-pattern>
+    	<url-pattern>/roomavailability</url-pattern>
+    	<url-pattern>/scripts</url-pattern>
+    	<url-pattern>/availability</url-pattern>
+    	<url-pattern>/password</url-pattern>
+    	<url-pattern>/sctreport</url-pattern>
+    	<url-pattern>/onlinereport</url-pattern>
+    	<url-pattern>/roompictures</url-pattern>
+    	<url-pattern>/rooms</url-pattern>
+    	<url-pattern>/roomgroups</url-pattern>
+    	<url-pattern>/roomfeatures</url-pattern>
+    	<url-pattern>/instructorattributes</url-pattern>
+    	<url-pattern>/solver</url-pattern>
+    	<url-pattern>/solverlog</url-pattern>
+    	<url-pattern>/teachingRequests</url-pattern>
+    	<url-pattern>/teachingAssignments</url-pattern>
+    	<url-pattern>/teachingAssignmentChanges</url-pattern>
+    	<url-pattern>/setupTeachingRequests</url-pattern>
+    	<url-pattern>/timetableGrid</url-pattern>
+    	<url-pattern>/pointInTimeDataReports</url-pattern>
+    	<url-pattern>/assignedClasses</url-pattern>
+    	<url-pattern>/notAssignedClasses</url-pattern>
+    	<url-pattern>/limitAndProjectionSnapshot</url-pattern>
+    	<url-pattern>/suggestions</url-pattern>
+    	<url-pattern>/cbs</url-pattern>
+    	<url-pattern>/solutionChanges</url-pattern>
+    	<url-pattern>/assignmentHistory</url-pattern>
+    	<url-pattern>/listSolutions</url-pattern>
+    	<url-pattern>/solutionReports</url-pattern>
+    	<url-pattern>/tasks</url-pattern>
+    	<url-pattern>/publishedSolutions</url-pattern>
+    	<url-pattern>/acrf</url-pattern>
+    	<url-pattern>/buildings</url-pattern>
+    	<url-pattern>/departments</url-pattern>
+    	<url-pattern>/assignClassInstructors</url-pattern>
+    	<url-pattern>/instructorSurvey</url-pattern>
+    	<url-pattern>/multipleClassSetup</url-pattern>
+    	<url-pattern>/instrOfferingConfig</url-pattern>
+    	<url-pattern>/offerings</url-pattern>
+    	<url-pattern>/classSearch</url-pattern>
+    	<url-pattern>/classAssignments</url-pattern>
+    	<url-pattern>/offering</url-pattern>
+    	<url-pattern>/subpart</url-pattern>
+    	<url-pattern>/clazz</url-pattern>
+    	<url-pattern>/instructors</url-pattern>
+    	<url-pattern>/instructor</url-pattern>
+    	<url-pattern>/crosslist</url-pattern>
+    	<url-pattern>/classEdit</url-pattern>
+    	<url-pattern>/subpartEdit</url-pattern>
+    	<url-pattern>/instructorPrefs</url-pattern>
+    	<url-pattern>/instrAssignmentPrefs</url-pattern>
+    	<url-pattern>/instructorAdd</url-pattern>
+    	<url-pattern>/instructorEdit</url-pattern>
+    	<url-pattern>/distributions</url-pattern>
+    	<url-pattern>/distributionAdd</url-pattern>
+    	<url-pattern>/distributionEdit</url-pattern>
+    	<url-pattern>/classAssignment</url-pattern>
+    	<url-pattern>/examinations</url-pattern>
+    	<url-pattern>/examination</url-pattern>
+    	<url-pattern>/examDistributions</url-pattern>
+    	<url-pattern>/examDistributionAdd</url-pattern>
+    	<url-pattern>/examDistributionEdit</url-pattern>
+    	<url-pattern>/examEdit</url-pattern>
+    	<url-pattern>/examAdd</url-pattern>
+    	<url-pattern>/catalog</url-pattern>
+    	<url-pattern>/assignedExams</url-pattern>
+    </servlet-mapping>
+	
+	<filter>
+        <filter-name>log4jServletFilter</filter-name>
+        <filter-class>org.apache.logging.log4j.web.Log4jServletFilter</filter-class>
+    </filter> 
+
+	<!-- Filter to automatically close any open hibernate sessions -->
+	<filter>
+		<filter-name>
+			Hibernate Session Filter
+		</filter-name>
+		<filter-class>
+			org.unitime.timetable.filter.HibSessionFilter
+		</filter-class>
+	</filter>
+	
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	
+	<filter>
+		<filter-name>
+			Page Access Filter
+		</filter-name>
+		<filter-class>
+			org.unitime.timetable.filter.PageAccessFilter
+		</filter-class>
+	</filter>
+
+	<filter>
+		<filter-name>
+			Encoding Filter
+		</filter-name>
+		<filter-class>
+			org.unitime.timetable.filter.EncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+
+	<filter>
+		<filter-name>
+			Query Log Filter
+		</filter-name>
+		<filter-class>
+			org.unitime.timetable.filter.QueryLogFilter
+		</filter-class>
+		<init-param>
+			<param-name>exclude</param-name>
+			<param-value>menu.gwt: MenuService#getSolverInfo,sectioning.gwt: SectioningService#logIn</param-value>
+		</init-param>
+	</filter>
+	
+	<filter>
+		<filter-name>
+			Message Log Filter
+		</filter-name>
+		<filter-class>
+			org.unitime.timetable.filter.MessageLogFilter
+		</filter-class>
+	</filter>
+	
+	<filter>
+		<filter-name>
+			Locale Filter
+		</filter-name>
+		<filter-class>
+			org.unitime.timetable.filter.LocaleFilter
+		</filter-class>
+		<init-param>
+			<param-name>use-browser-settings</param-name>
+			<param-value>false</param-value>
+		</init-param>
+	</filter>
+	
+	<filter>
+		<filter-name>JavaScript Cache Filter</filter-name>
+		<filter-class>org.unitime.timetable.filter.JavaScriptCacheFilter</filter-class>
+	</filter>
+	
+	<filter>
+		<filter-name>Busy Sessions</filter-name>
+		<filter-class>org.unitime.timetable.filter.BusySessions$Filter</filter-class>
+	</filter>
+	
+	<filter>
+		<filter-name>Apache Struts 2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>struts-default.xml,struts-plugin.xml,../struts.xml</param-value>
+		</init-param>
+    </filter>
+    
+    <filter>
+    	<filter-name>Do-Action Redirect</filter-name>
+    	<filter-class>org.unitime.timetable.filter.DoToActionRedirectFilter</filter-class>
+    </filter>
+    
+    <filter>
+    	<filter-name>User Settings Filter</filter-name>
+    	<filter-class>org.unitime.timetable.filter.UserSettingsFilter</filter-class>
+    </filter>
+    
+	<!-- Filter Mappings -->
+	<filter-mapping>
+        <filter-name>log4jServletFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+        <dispatcher>ASYNC</dispatcher><!-- Servlet 3.0 w/ disabled auto-initialization only; not supported in 2.5 -->
+    </filter-mapping>
+    
+    <filter-mapping>
+    	<filter-name>Do-Action Redirect</filter-name>
+    	<url-pattern>*.do</url-pattern>
+    </filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>Encoding Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>Hibernate Session Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>Message Log Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>Page Access Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>Query Log Filter</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>Query Log Filter</filter-name>
+		<url-pattern>*.gwt</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>Query Log Filter</filter-name>
+		<url-pattern>/calendar</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>Query Log Filter</filter-name>
+		<url-pattern>/export</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>Query Log Filter</filter-name>
+		<url-pattern>/api/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>Locale Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>JavaScript Cache Filter</filter-name>
+		<url-pattern>*.js</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>JavaScript Cache Filter</filter-name>
+		<url-pattern>*.css</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>Busy Sessions</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+    <filter-mapping>
+		<filter-name>User Settings Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+    	<filter-name>Apache Struts 2</filter-name>
+    	<url-pattern>*.action</url-pattern>
+    </filter-mapping>
+
+	<jsp-config>
+		<jsp-property-group>
+			<url-pattern>*.jspf</url-pattern>
+		</jsp-property-group>
+	</jsp-config>
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/applicationContext.xml</param-value>
+	</context-param>
+	
+	<context-param>
+        <param-name>isLog4jAutoInitializationDisabled</param-name>
+        <param-value>true</param-value>
+    </context-param>
+	
+	<context-param>
+		<param-name>log4jContextName</param-name>
+		<param-value>UniTime</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>log4jConfiguration</param-name>
+		<param-value>log4j2-UniTime.xml</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>org.apache.tiles.definition.DefinitionsFactory.DEFINITIONS_CONFIG</param-name>
+		<param-value>/WEB-INF/tiles.xml</param-value>
+	</context-param> 
+	
+	<listener>
+        <listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
+    </listener>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.unitime.timetable.filter.BusySessions$Listener</listener-class>
+	</listener>
+	<!-- CAS Authentication -->
+	<listener>
+		<listener-class>org.apereo.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.apache.struts2.tiles.StrutsTilesListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.unitime.timetable.server.access.AccessControllBackend$Listener</listener-class>
+	</listener>
+</web-app>

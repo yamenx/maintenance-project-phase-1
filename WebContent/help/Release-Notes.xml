@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/css" href="Release-Notes.css"?>
+<!DOCTYPE release-history PUBLIC "-//UniTime//UniTime Release Notes DTD/EN" "Release-Notes.dtd">
+<!--
+ * Licensed to The Apereo Foundation under one or more contributor license
+ * agreements. See the NOTICE file distributed with this work for
+ * additional information regarding copyright ownership.
+ *
+ * The Apereo Foundation licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at:
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ -->
+
+<release-history>
+
+<doc-title>UniTime 4.9 Release Notes</doc-title>
+
+<release>
+	<version>4.9.${build.number}</version>
+	<release-date>${build.date}</release-date>
+	<category>
+		<title>Course Timetabling</title>
+		<item>
+			<name>Edit Class: Exact Times</name>
+			<description>
+				<line>When adding exact times, do not include a time without a day of the week selected.</line>
+			</description>
+		</item>
+	</category>
+</release>
+
+<release>
+	<version>4.9.125</version>
+	<release-date>Sat, 18 Apr 2026</release-date>
+	<category>
+		<title>Course Timetabling</title>
+		<item>
+			<name>Distribution Preferences: Single Table</name>
+			<description>
+				<line>Added an option to show all distribution preferences in a single table, not split by subject area.
+					<line>To enable, set unitime.distributions.showSingleTable to true (defaults to false).</line>
+				</line>
+			</description>
+		</item>
+	</category>
+	<category>
+		<title>Student Scheduling</title>
+		<item>
+			<name>Batch Student Solver Dashboard: Filter</name>
+			<description>
+				<line>Do not show "My Students Not Advised" and "Not Advised" mode options in the filter, as they cannot be computed correctly.</line>
+			</description>
+		</item>
+	</category>
+	<category>
+		<title>Administration</title>
+		<item>
+			<name>Session Roll Forward: Room Split Attendance</name>
+			<description>
+				<line>Include the split attendance flag (set on individual classes) in the roll forward.</line>
+			</description>
+		</item>
+		<item>
+			<name>Contact Us: Attachments</name>
+			<description>
+				<line>Fixed the ability to attach files to the email inquiry.</line>
+			</description>
+		</item>
+		<item>
+			<name>Data Exchange: Preferences</name>
+			<description>
+				<line>Include instructor unavailability in the Preferences XML export and import.</line>
+			</description>
+		</item>
+	</category>
+	<category>
+		<title>Other</title>
+		<item>
+			<name>WCAG/Accessibility</name>
+			<description>
+				<line>Various adjustments to improve WCAG compliance of UniTime pages.</line>
+				<line>Most pages should now be fully compliant with WCAG 2.2 level AA, with the following exceptions (typically only available to examination managers and administrators):
+					<line>Student &gt; Enrollment Audits: Form field missing a label (4.1.2)</line>
+					<line>Most pages under Examinations &gt; Examination Timetabling (except for Solver and Log): Container element is empty (1.3.1), Minimum contrast (1.4.3), Form field missing a label (4.1.2), and Keyboard accessibility (2.1.1)</line>
+					<line>Examination Assignment: Image missing a text alternative (1.1.1), Minimum contrast (1.4.3), Form field missing a label (4.1.2), and Keyboard accessibility (2.1.1)</line>
+					<line>Examinations &gt; Pdf Reports: Form field missing a label (4.1.2)</line>
+					<line>Some of the pages under Administration (those still using Struts2): Container element is empty (1.3.1), Minimum contrast (1.4.3), Form field missing a label (4.1.2), and Keyboard accessibility (2.1.1)</line>
+				</line>
+				<line>The above-mentioned pages are all old pages still written in Struts 2. They are planned to be made ADA compliant together with their rewrite to GWT at a later release.</line>
+				<line>For preference colors, you can switch among three options in Preferences &gt; Settings, under High Contrast Preferences: Use preference levels with color backgrounds.
+					<line>yes: (which is the default now) will use preference colors as backgrounds</line>
+					<line>no: will use the new (much darker) preference colors that satisfy the 4.5:1 contrast ratio</line>
+					<line>legacy: will use the old non-ADA compliant colors</line>
+				</line>
+			</description>
+		</item>
+	</category>	
+</release>
+
+<release>
+	<version>4.9.116</version>
+	<release-date>Sat, 21 Mar 2026</release-date>
+	<category>
+		<title>Course Timetabling</title>
+		<item>
+			<name>Class/Scheduling Subpart Detail: Distribution Preferences</name>
+			<description>
+				<line>Corrected the permission checking for the Add Distribution Preference button so that a Department Schedule Manager would see the button on an externally managed class or scheduling subpart.</line>
+			</description>
+		</item>
+		<item>
+			<name>Room Preference Index: Various Fixes</name>
+			<description>
+				<line>Session Roll Forward: Copy room index for room-related preferences (room, room feature, room group, and building preferences).</line>
+				<line>Preferences XML: Include roomIndex attribute for room-related preferences.</line>
+				<line>Multiple Class Setup: Copy room index when room-related preferences are being moved pushed to the class level due to the change of the subpart's managing department.</line>
+			</description>
+		</item>
+		<item>
+			<name>Course Catalog</name>
+			<description>
+				<line>Create a simple page that shows information provided by the custom CourseDetailsProvider.</line>
+				<line>To enable:
+					<line>Configure unitime.custom.CourseDetailsProvider (returning an HTML snippet)</line>
+					<line>Set unitime.custom.CourseUrlProvider to org.unitime.timetable.server.courses.CourseCatalogBackend.</line>
+					<line>Set the Course Catalog permission for all the roles that should be able to see the catalog page.</line>
+					<line>Possibly adjust the custom CSS to improve catalog page formatting.</line>
+				</line>
+			</description>
+		</item>
+		<item>
+			<name>Class Detail: Timetable</name>
+			<description>
+				<line>Fixed an exception thrown when showing an in-memory assignment with a partially-assigned violated distribution preference.</line>
+			</description>
+		</item>
+		<item>
+			<name>Distribution Types: Custom Back-To-Backs</name>
+			<description>
+				<line>Added the ability to parametrize Back-To-Back and Back-To-Back &amp; Same Room distribution constraints.</line>
+				<line>Back-To-Back can now have a reference BTB_TIME(min,max), where min and max are the bounds on the gap between two consecutive classes in time slots.
+					<line>For example, BTB_TIME(0,3) will allow a gap of at most 15 minutes (3 time slots) between consecutive classes.</line>
+				</line>
+				<line>Back-To-Back &amp; Same Room can now have a reference BTB(min,max), where min and max are the bounds on the gap between two consecutive classes in time slots.
+					<line>For example, BTB(6,6) will require a gap of exactly six time slots (30 minutes) between any consecutive classes.</line>
+				</line>
+			</description>
+		</item>
+	</category>
+	<category>
+		<title>Student Scheduling</title>
+		<item>
+			<name>Wait-Listing: Custom Validation</name>
+			<description>
+				<line>Skip revalidation for a course that was made not offered (avoid null exception).</line>
+			</description>
+		</item>
+		<item>
+			<name>Solver Reports: Course Request Alternatives Statistics</name>
+			<description>
+				<line>Added Course Request Alternatives Statistics report, an experimental report comparing course requests and advisor recommendations with and without alternatives.</line>
+				<line>Only available to user roles with Student Sectioning Solver Admin Reports role.</line>
+			</description>
+		</item>
+		<item>
+			<name>Student Scheduling Assistant: Custom Enrollment Provider</name>
+			<description>
+				<line>Fixed an issue that occurs when a student is enrolled in the same class multiple times (under different courses), tries to drop a class, and the drop is not allowed/fails due to the external system.
+					<line>The student was removed from the section in UniTime, and Special Registration did not get triggered.</line>
+				</line>
+			</description>
+		</item>
+		<item>
+			<name>Batch Student Scheduling: Free Times</name>
+			<description>
+				<line>For students with FT (need free-time) accommodation: added an ability to mark the free-time requests as higher priority.
+					<line>Using solver parameter Load.FreeTimeAccRequestPriority set to Normal, Important, Vital, or Critical</line>
+				</line>
+				<line>Added an ability to make sure that low-priority course requests do not overlap with a higher-priority free time request, even when it is not assigned.
+					<line>Using solver parameter Sectioning.FreeTimeConflict is set to true; set to false by default.</line>
+				</line>
+				<line>A few changes in the user interface to show free time request priority and free time conflicts.</line>
+			</description>
+		</item>
+		<item>
+			<name>Student Scheduling Disclaimer</name>
+			<description>
+				<line>A new optional text field is available on the instructional offering configuration level called Student Scheduling Disclaimer.</line>
+				<line>It is editable with Instructional Offering Edit Disclaimer permission using Instructional Offering Configuration or the Multiple Class Setup page.</line>
+				<line>Default scheduling disclaimers can be defined using the Default Scheduling Disclaimers administrative page.</line>
+			</description>
+		</item>
+		<item>
+			<name>Student Scheduling Assistant: Submit Schedule Confirmations</name>
+			<description>
+				<line>All Submit Schedule confirmations are now present in a single Confirmation dialog.</line>
+				<line>Display scheduling disclaimers in Course Finder and in the class schedule.</line>
+				<line>When adding a new course or switching to a different config that has a different scheduling disclaimer, display the disclaimer in the Confirmation dialog.</line>
+			</description>
+		</item>
+		<item>
+			<name>Student Course Requests and Advisor Course Recommendations: Validation</name>
+			<description>
+				<line>Created a new default Student Course Request Validation and Advisor Course Recommendations Validator that only does the UniTime-related checks,
+				which include: no alternative course provided, associated course checks (associated course on the same request line,
+				associated course requested as substitute, parent course not present), high-priority free time, min/max credit checks,
+				scheduling rules check, single-section time conflict check, inconsistent student preferences check, and the new student scheduling disclaimer.</line>
+				<line>Also include the new student scheduling disclaimer in the course validation.
+					<line>When a course has only a single configuration or multiple configurations with the same disclaimer, just display the disclaimer for the course.</line>
+					<line>When there are multiple disclaimers, prefix the disclaimer with the instructional method of the configuration with the disclaimer.
+						Reservations and scheduling rules are checked, and configurations that the student cannot take are ignored.</line>
+				</line>
+			</description>
+		</item>
+	</category>
+	<category>
+		<title>Event Management</title>
+		<item>
+			<name>Service Providers: HQL Bug Fix</name>
+			<description>
+				<line>Fixed a query that loads all rooms for a service provider associated with a department, applying to all the department's event rooms.</line>
+			</description>
+		</item>
+	</category>
+	<category>
+		<title>Other</title>
+		<item>
+			<name>WCAG/Accessibility</name>
+			<description>
+				<line>Various adjustments to improve WCAG compliance of UniTime pages.</line>
+			</description>
+		</item>
+	</category>
+</release>
+
+<release>
+	<version>4.9.102</version>
+	<release-date>Tue, 16 Dec 2025</release-date>
+	<category>
+		<title>Course Timetabling</title>
+		<item>
+			<name>Instructional Offerings, Classes, Class Assignments: Legacy Check</name>
+			<description>
+				<line>When an old (Struts-based) page URL is used, but the configuration does not enable the legacy version of the page, redirect to the new (GWT-based) page.</line>
+				<line>This makes the Classes and Class Assignments links on the Not-Assigned Classes page point to the correct versions of the two pages.</line>
+			</description>
+		</item>
+		<item>
+			<name>Suggestions</name>
+			<description>
+				<line>Compute and populate conflicting constraints when a placement with conflicts is selected from the Suggestions table in the Placements mode.</line>
+				<line>Fixed a problem when an invalid placement is selected for the 2nd or later class from the Selected Assignment, which was causing conflicting placements to get unassigned.</line>
+			</description>
+		</item>
+		<item>
+			<name>Max (Work) Days Range Distributions</name>
+			<description>
+				<line>Given classes must be taught within the number of consecutive days or work days.</line>
+				<line>This means that between the first and last meeting of all classes in the constraint, there cannot be more than the given number of consecutive days or work days, including the first and last day.</line>
+				<line>When work days are used: Weekends, holidays, and breaks are ignored.</line>
+			</description>
+		</item>
+	</category>
+	<category>
+		<title>Student Scheduling</title>
+		<item>
+			<name>Course Reservations</name>
+			<description>
+				<line>Improved course checking for course-related reservations.
+					<line>Check the course of the enrollment/request rather than all courses that the student is requesting.</line>
+					<line>This can make a difference when a student requests multiple cross-listed courses from the same instructional offering.</line>
+				</line>
+			</description>
+		</item>
+		<item>
+			<name>Universal Reservations</name>
+			<description>
+				<line>Added an ability to filter by requested course using the course: tag.</line>
+			</description>
+		</item>
+		<item>
+			<name>Scheduling Assistant: Submit</name>
+			<description>
+				<line>Ensure that there are enough primary course requests to cover all enrolled and wait-listed courses. </line>
+				<line>This optional check fixes an issue where a student may end up in a state where a substitute course is enrolled without a matching not-assigned course request that it is substituting.</line>
+				<line>The check can be disabled by setting unitime.enrollment.checkSubstitutes to false.</line>
+			</description>
+		</item>
+		<item>
+			<name>Student Notifications: Course is no longer requested</name>
+			<description>
+				<line>When a course is made not offered, only send a notification when the student was initially enrolled in the course.</line>
+			</description>
+		</item>
+	</category>
+	<category>
+		<title>Administration</title>
+		<item>
+			<name>Subject Areas: Delete</name>
+			<description>
+				<line>Fixed a Hibernate exception (ObjectDeletedException) when deleting a subject area that has some not-offered courses.</line>
+				<line>Caused by the latest Hibernate upgrade (to version 6.6).</line>
+			</description>
+		</item>
+		<item>
+			<name>Student &amp; Instructor Name Format</name>
+			<description>
+				<line>Fixed an exception that was thrown when a first name or a last name is just a single space for name formats using initials.</line>
+			</description>
+		</item>
+		<item>
+			<name>Data Exchange: Examination XML</name>
+			<description>
+				<line>Examination XML Export: added the following examination attributes:
+					<line>enrollment: number of students enrolled in the classes/courses of the exam</line>
+					<line>limit: total limit of the classes/courses of the exam</line>
+				</line>
+			</description>
+		</item>
+		<item>
+			<name>Technology Update</name>
+			<description>
+				<line>The following dependencies have been updated:
+					<line>Apache Struts2 to 7.1.1 to fix CVE-2025-64775 vulnerability.</line>
+				</line>
+			</description>
+		</item>
+	</category>
+</release>
+
+<release>
+	<version>4.9.93</version>
+	<release-date>Thu, 30 Oct 2025</release-date>
+	<category>
+		<title>Course Timetabling</title>
+		<item>
+			<name>Add/Edit Instructor</name>
+			<description>
+				<line>Corrected the label for the instructor email field.</line>
+			</description>
+		</item>
+		<item>
+			<name>Instructional Offerings, Classes</name>
+			<description>
+				<line>Do not show examination columns when there are no examination periods defined (Examinations do not show up in the Filter).</line>
+				<line>Added an ability to not show the subject area titles in the filter (when unitime.offering.subjectFilterShowTitles is set to false).</line>
+			</description>
+		</item>
+		<item>
+			<name>Add/Edit Room: Room Sharing</name>
+			<description>
+				<line>Added an ability to list all departments as available for room sharing (instead of those that are being used, i.e., departments that have a manager, a subject area, or another room).
+					<line>Set unitime.roomDepts.usedDepartmentsOnly to false to enable (defaults to true, only show departments that are being used).</line>
+				</line>
+			</description>
+		</item>
+	</category>
+	<category>
+		<title>Examination Timetabling</title>
+		<item>
+			<name>Add/Edit Examination</name>
+			<description>
+				<line>Corrected setting of neutral period preferences for midterm exams.</line>
+			</description>
+		</item>
+	</category>
+	<category>
+		<title>Student Scheduling</title>
+		<item>
+			<name>Student Scheduling Solver: Dependent Courses</name>
+			<description>
+				<line>Corrected the can leave unassigned check for branch&amp;bound.</line>
+				<line>When the associated course is to be moved up during solver load, swap the associated and the dependent courses instead of adjusting the comparator (to avoid transitivity issues with the comparator).</line>
+			</description>
+		</item>
+		<item>
+			<name>Online Student Scheduling Dashboard: Release/Suppress PIN</name>
+			<description>
+				<line>Display a confirmation dialog when students not advised by the user are involved in the PIN release change.</line>
+			</description>
+		</item>
+	</category>
+	<category>
+		<title>Administration</title>
+		<item>
+			<name>Add/Edit Subject Area</name>
+			<description>
+				<line>List all available departments (excluding externally managed ones) for a subject area.
+					<line>Instead of those that are being used (have a manager, a room, or another subject).</line>
+				</line>
+			</description>
+		</item>
+	</category>
+</release>
+
+<release>
+	<version>4.9.89</version>
+	<release-date>Wed, 15 Oct 2025</release-date>
+	<category>
+		<title>Course Timetabling</title>
+		<item>
+			<name>Class Assignment</name>
+			<description>
+				<line>Always show the student conflicts for the selected assignment. The Show student conflicts toggle only applies to the conflict numbers for the available times.</line>
+				<line>A few changes have been made to improve the page speed.</line>
+			</description>
+		</item>
+		<item>
+			<name>Classes, Class Assignments: Export CSV</name>
+			<description>
+				<line>Do not split the CSV export by subject area.</line>
+			</description>
+		</item>
+	</category>
+	<category>
+		<title>Examination Timetabling</title>
+		<item>
+			<name>Add/Edit Examination: Size</name>
+			<description>
+				<line>Examination size did not get updated.</line>
+				<line>Set the maximal number of rooms to zero when the Maximum Number of Rooms is left empty.</line>
+			</description>
+		</item>
+		<item>
+			<name>Add/Edit Examination: Preferences</name>
+			<description>
+				<line>Fixed a problem of the Add/Edit Examination page not being loaded up correctly when there are no room features or no room groups.</line>
+			</description>
+		</item>
+	</category>
+	<category>
+		<title>Student Scheduling</title>
+		<item>
+			<name>Solver Dashboard: Dependent Courses</name>
+			<description>
+				<line>Show the "Not-assigned associated course {0}." message when applicable while showing student details (List of Classes).</line>
+			</description>
+		</item>
+		<item>
+			<name>Student Scheduling Manual</name>
+			<description>
+				<line>A new student scheduling manual is linked from the menu (Help &gt; Manuals).</line>
+			</description>
+		</item>
+	</category>
+</release>
+
+<release>
+	<version>4.9.85</version>
+	<release-date>Sat, 4 Oct 2025</release-date>
+	<category>
+		<title>Course Timetabling</title>
+		<item>
+			<name>Instructional Offerings, Classes, Instructional Offering Detail: Time Preferences</name>
+			<description>
+				<line>Corrected display for time preferences when set to be displayed as text (allow the preference to get split into multiple lines).</line>
+			</description>
+		</item>
+		<item>
+			<name>Edit Class/Scheduling Subpart: Time Preferences</name>
+			<description>
+				<line>Do not pop up the required/not-required times warning for a user who has the "Display confirmation dialogs" preference set to no.</line>
+			</description>
+		</item>
+		<item>
+			<name>Instructional Offering Detail: Last Changes</name>
+			<description>
+				<line>Last Changes table made sortable, sort be Date (desc) by default.</line>
+				<line>Added the last Class Assignment change.</line>
+			</description>
+		</item>
+		<item>
+			<name>Distribution Preferences: Sort</name>
+			<description>
+				<line>Distribution Preferences table made sortable.</line>
+			</description>
+		</item>
+		<item>
+			<name>Instructional Offering Detail: Configurations</name>
+			<description>
+				<line>Configuration tables do not show the configuration line on the Instructional Offering Detail page.</line>
+				<line>Scheduling subpart lines have blue background for not-offered courses.</line>
+			</description>
+		</item>
+	</category>
+	<category>
+		<title>Examination Timetabling</title>
+		<item>
+			<name>Examinations, Examination Distribution Preferences: Export CSV/PDF/XML</name>
+			<description>
+				<line>Corrected permission checking when one or more subject areas are selected.</line>
+			</description>
+		</item>
+		<item>
+			<name>Examination Detail: Clone</name>
+			<description>
+				<line>The new exam does not copy the period preferences from the original exam (just like it did not on the legacy Struts-based page).</line>
+			</description>
+		</item>
+		<item>
+			<name>Add/Edit Examination: Period Preferences</name>
+			<description>
+				<line>Do not allow for required/prohibited preferences when the user does not have the Can Use Hard Period Prefs permission.</line>
+			</description>
+		</item>
+		<item>
+			<name>Add Examination: Instructors</name>
+			<description>
+				<line>Pre-populate the list of available instructors when adding an exam from the Instructional Offering Detail or the Class Detail page.</line>
+			</description>
+		</item>
+		<item>
+			<name>Examination Timetabling Manual</name>
+			<description>
+				<line>A new examination timetabling manual is linked from the menu (Help &gt; Manuals).</line>
+			</description>
+		</item>
+	</category>
+</release>
+
+<release>
+	<version>4.9.82</version>
+	<release-date>Fri, 26 Sep 2025</release-date>
+	<category>
+		<title>Course Timetabling</title>
+		<item>
+			<name>Technology Update / GWT</name>
+			<description>
+				<line>The following pages have been rewritten to GWT:
+					<line>Instructional Offerings</line>
+					<line>Classes</line>
+					<line>Class Assignments</line>
+					<line>Instructional Offering Detail</line>
+					<line>Scheduling Subpart Detail</line>
+					<line>Class Detail</line>
+					<line>Instructors</line>
+					<line>Instructor Detail</line>
+					<line>Instructional Offering Cross Lists</line>
+					<line>Edit Class</line>
+					<line>Edit Scheduling Subpart</line>
+					<line>Instructor Preferences</line>
+					<line>Instructor Assignment Preferences</line>
+					<line>Add/Edit Instructor</line>
+					<line>Distribution Preferences</line>
+					<line>Add/Edit Distribution Preference</line>
+					<line>Class Assignment</line>
+				</line>
+			</description>
+		</item>
+	</category>
+	<category>
+		<title>Examination Timetabling</title>
+		<item>
+			<name>Technology Update / GWT</name>
+			<description>
+				<line>The following pages have been rewritten to GWT:
+					<line>Examinations</line>
+					<line>Examination Detail</line>
+					<line>Add/Edit Examination</line>
+					<line>Examination Distribution Preferences</line>
+					<line>Add/Edit Examination Distribution Preference</line>
+				</line>
+			</description>
+		</item>
+	</category>
+	<category>
+		<title>Student Scheduling</title>
+		<item>
+			<name>Added support for Dependent Courses</name>
+			<description>
+				<line>If both the dependent course and its parent (associated) course are requested by a student,
+						the student scheduling student solver can assign the student the dependent course only when
+						the associated course is also assigned.
+				</line>
+				<line>Edit Course Offering: Associated Course field added.
+					<line>Only available when unitime.sectioning.parentCourse is set to true (defaults to false).</line>
+					<line>Also, Edit Course Offering Associated Course permission is needed to edit the associated course of a dependent course.</line>
+				</line>
+				<line>Instructional Offering Detail: display the Associated Course when set.</line>
+				<line>Student Scheduling Solver: load associated courses into the solver, create a new Dependent Courses global constraint.
+					<line>Various heuristics and algorithms adjusted to correctly handle dependent courses.</line>
+				</line>
+				<line>Solver Reports: Not-Assigned Associated Course Issues report added, listing cases when a student has the dependent course assigned without having the associated course.</line>
+				<line>Scheduling Dashboards: show an error when not-assigned associated course as a reason for a dependent course not being assigned.</line>
+				<line>Course Requests &amp; Advisor Recommendation Credit Computation: adjusted credit computation for dependent courses.</line>
+				<line>Scheduling Assistant: show the &quot;Not assigned associated course X.&quot; message when a course cannot be assigned because the associated course is requested, but not assigned.</line>
+				<line>Roll Forward Session: added an option to copy associated course settings from the previous session.</line>
+			</description>
+		</item>
+		<item>
+			<name>Scheduling Assistant: Not available (course is full).</name>
+			<description>
+				<line>When displaying the &quot;Not available (course is full).&quot; for a course for which a limit override can be requested,
+					also include &quot;An override can be requested.&quot; in the message.</line>
+				<line>Only enabled when unitime.enrollment.fullCourseCanRequestOverride is set to true.</line>
+			</description>
+		</item>
+	</category>	
+	<category>
+		<title>Administration</title>
+		<item>
+			<name>Technology Update</name>
+			<description>
+				<line>Jakarta EE Migration: UniTime 4.9 requires Java 17 and Apache Tomcat 10.1 or later to run.</line>
+				<line>The following dependencies have been updated:
+					<line>Apache Struts2 to 7.0</line>
+					<line>Spring Framework to 6.2</line>
+					<line>Spring Security to 6.4</line>
+					<line>Spring Integration to 6.4</line>
+					<line>Jakarta Servlet API 6.1</line>
+					<line>Jakarta JSP API 4.0</line>
+					<line>Jakarta Standard Tag Library API 3.0</line>
+				</line>
+			</description>
+		</item>
+		<item>
+			<name>API Tokens, Query Encoder</name>
+			<description>
+				<line>Added an ability to use more secure algorithms to encode query parameters and API token using the following parameters:
+					<line>unitime.encode.algorithm=PBKDF2WithHmacSHA512</line>
+					<line>unitime.encode.iterationCount=100000</line>
+					<line>unitime.encode.keyLength=128</line>
+					<line>unitime.encode.cipher=AES/CBC/PKCS5Padding</line>
+					<line>unitime.encode.cipher.iv=FIXME</line>
+				</line>
+				<line>Please note that any change in the above parameters will invalidate the existing API tokens and encoded queries.</line>
+			</description>
+		</item>
+		<item>
+			<name>Data Exchange</name>
+			<description>
+				<line>Course Offerings Export: only export exam size when it is set (not when it is counted from enrollment data).</line>
+				<line>Course Offerings Import: improved handling of multiple scheduling subparts with the same instructional type on the same level.</line>
+				<line>Course Offerings Import: corrected import of assigned period when print offsets are being used.</line>
+				<line>Examinations Import: added an exams-only import (matching the exams-only export).</line>
+				<line>GZip the exported XMLs when unitime.export.TYPE.xml.gz is set to true (defaults to false, TYPE is the name of the root element in the export).</line>
+			</description>
+		</item>
+	</category>	
+</release>
+</release-history>
