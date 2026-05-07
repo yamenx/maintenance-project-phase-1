@@ -18,7 +18,7 @@
  * 
 */
 package org.unitime.timetable.events;
-
+import java.util.objects;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
@@ -137,9 +137,15 @@ public class RelatedObjectLookupBackend extends EventAction<RelatedObjectLookupR
 				if (course == null) break;
 				
 				boolean coordinator = false;
+					
 				for (OfferingCoordinator oc: course.getInstructionalOffering().getOfferingCoordinators()) {
-					if (context.getUser().getExternalUserId().equals(oc.getInstructor().getExternalUniqueId())) { coordinator = true; break; }
-				}
+    if (Objects.equals(
+            context.getUser().getExternalUserId(),
+            oc.getInstructor().getExternalUniqueId())) {
+        coordinator = true;
+        break;
+    }
+}
 				
 				Set<InstrOfferingConfig> configs = new TreeSet<InstrOfferingConfig>(new InstrOfferingConfigComparator(null));
 				if (coordinator) {
@@ -255,10 +261,15 @@ public class RelatedObjectLookupBackend extends EventAction<RelatedObjectLookupR
 			case SUBPART:
 				course = CourseOfferingDAO.getInstance().get(request.getCourseId());
 				coordinator = false;
+					
 				for (OfferingCoordinator oc: course.getInstructionalOffering().getOfferingCoordinators()) {
-					if (context.getUser().getExternalUserId().equals(oc.getInstructor().getExternalUniqueId())) { coordinator = true; break; }
-				}
-				
+    if (Objects.equals(
+            context.getUser().getExternalUserId(),
+            oc.getInstructor().getExternalUniqueId())) {
+        coordinator = true;
+        break;
+    }
+}
 				Set<Class_> classes = new TreeSet<Class_>(new ClassComparator(ClassComparator.COMPARE_BY_HIERARCHY));
 				if (coordinator) {
 					classes.addAll(hibSession.createQuery("select c from Class_ c where c.schedulingSubpart.uniqueId = :subpartId", Class_.class
