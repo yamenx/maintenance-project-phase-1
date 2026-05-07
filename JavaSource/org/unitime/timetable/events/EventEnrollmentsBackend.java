@@ -17,6 +17,7 @@
  * limitations under the License.
  * 
 */
+
 package org.unitime.timetable.events;
 
 import java.util.ArrayList;
@@ -857,25 +858,24 @@ public class EventEnrollmentsBackend extends EventAction<EventEnrollmentsRpcRequ
 		
         org.hibernate.Session hibSession = EventDAO.getInstance().getSession();
         
-		// class events
-        for (int t2 = 0; t2 < ExamOwner.sOwnerTypes.length; t2++) {
-        	for (Object[] o: hibSession.createQuery(
-        			"select s1.student.uniqueId, m1" +
-        			" from StudentClassEnrollment s1, ClassEvent e1 inner join e1.meetings m1, CourseEvent e2 inner join e2.meetings m2 inner join e2.relatedCourses o2, StudentClassEnrollment s2" +
-        			" where e2.uniqueId = :eventId and e1.uniqueId != e2.uniqueId and e1.clazz = s1.clazz and s1.student = s2.student" +
-        			where(t2, 2) + 
-        			" and m1.meetingDate = m2.meetingDate and m1.startPeriod < m2.stopPeriod and m2.startPeriod < m1.stopPeriod and m2.approvalStatus <= 1 and m1.approvalStatus = 1",
-        			Object[].class)
-        			.setParameter("eventId", event.getUniqueId()).list()) {
-        		Long studentId = (Long)o[0];
-        		Meeting meeting = (Meeting)o[1];
-        		List<Meeting> meetings = conflicts.get(studentId);
-        		if (meetings == null) {
-        			meetings = new ArrayList<Meeting>(); conflicts.put(studentId, meetings);
-        		}
-        		meetings.add(meeting);
-        	}
-        }
+		// class events — BUG FIX: removed erroneous outer loop over ExamOwner.sOwnerTypes.
+		// ClassEvent has no exam owners; looping caused duplicate meetings to be added per student.
+    	for (Object[] o: hibSession.createQuery(
+    			"select s1.student.uniqueId, m1" +
+    			" from StudentClassEnrollment s1, ClassEvent e1 inner join e1.meetings m1, CourseEvent e2 inner join e2.meetings m2 inner join e2.relatedCourses o2, StudentClassEnrollment s2" +
+    			" where e2.uniqueId = :eventId and e1.uniqueId != e2.uniqueId and e1.clazz = s1.clazz and s1.student = s2.student" +
+    			where(0, 2) +
+    			" and m1.meetingDate = m2.meetingDate and m1.startPeriod < m2.stopPeriod and m2.startPeriod < m1.stopPeriod and m2.approvalStatus <= 1 and m1.approvalStatus = 1",
+    			Object[].class)
+    			.setParameter("eventId", event.getUniqueId()).list()) {
+    		Long studentId = (Long)o[0];
+    		Meeting meeting = (Meeting)o[1];
+    		List<Meeting> meetings = conflicts.get(studentId);
+    		if (meetings == null) {
+    			meetings = new ArrayList<Meeting>(); conflicts.put(studentId, meetings);
+    		}
+    		meetings.add(meeting);
+    	}
         
     	// examination events
         for (int t1 = 0; t1 < ExamOwner.sOwnerTypes.length; t1++) {
