@@ -29,7 +29,7 @@ import java.util.Locale;
 public class DateUtils {
     public static int getWeek(Date date) {
 		if (date == null) {
-    throw new IllegalArgumentException("Date cannot be null");
+    return -1;
 }
     	Calendar c = Calendar.getInstance(Locale.US);
     	c.setTime(date);

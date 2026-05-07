@@ -59,6 +59,10 @@ import org.unitime.timetable.model.TimetableManager;
 /**
  * @author Tomas Muller
  */
+
+// TODO: Refactor this large enum into smaller grouped enums
+// (CourseRight, RoomRight, EventRight) to improve maintainability
+
 public enum Right {
 	/** Session default: current session */
 	SessionDefaultCurrent, // -- DEFAULT SESSION SELECTION
