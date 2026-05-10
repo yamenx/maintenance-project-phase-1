@@ -1,0 +1,14 @@
+# Project Description
+
+This project is part of the UniTime timetable management system.
+
+The selected subsystem is the Security Rights subsystem. It controls user permissions for different parts of the system such as courses, events, and rooms.
+
+The original issue is that all permissions were grouped in one large enum called Right.java, which made the code hard to maintain and understand.
+
+The required change is to organize related permissions into separate enums:
+- CourseRight
+- EventRight
+- RoomRight
+
+This improves readability, maintainability, and separation of concerns.
