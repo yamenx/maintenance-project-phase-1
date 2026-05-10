@@ -1,1 +1,23 @@
+# Change Request
 
+## Title
+Refactor Security Rights Enum
+
+## Type
+Code improvement / Maintainability fix
+
+## Description
+The current Right.java file contains many permissions for different system modules. This makes it difficult to read, maintain, and extend.
+
+The change will introduce separate enums:
+- CourseRight
+- EventRight
+- RoomRight
+
+Each enum will represent permissions related to one subsystem.
+
+## Expected Benefit
+- Better code organization
+- Easier maintenance
+- Clearer subsystem boundaries
+- Lower risk when adding new permissions
