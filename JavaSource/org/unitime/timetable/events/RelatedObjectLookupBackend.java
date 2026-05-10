@@ -18,7 +18,7 @@
  * 
 */
 package org.unitime.timetable.events;
-import java.util.objects;
+import java.util.Objects;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
