@@ -22,7 +22,7 @@ public class RightRefactorTest {
         }
 
         System.out.println(CourseRight.InstructionalOfferings);
-        System.out.println(EventRight.EventAdd);
+        System.out.println(EventRight.EventAddCourseRelated);
         System.out.println(RoomRight.RoomEdit);
 
         System.out.println("All refactoring tests passed successfully.");
