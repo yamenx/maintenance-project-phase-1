@@ -1,1 +1,44 @@
 
+Project Requirements
+
+Functional Requirements
+
+1. The system shall separate security permissions into domain-specific enums.
+2. The system shall create a CourseRight enum for course-related permissions.
+3. The system shall create an EventRight enum for event-related permissions.
+4. The system shall create a RoomRight enum for room-related permissions.
+5. The system shall move existing course permissions from Right.java into CourseRight.
+6. The system shall move existing event permissions from Right.java into EventRight.
+7. The system shall move existing room permissions from Right.java into RoomRight.
+8. The system shall update all references in the codebase to use the new enum names.
+9. The system shall preserve the existing behavior of permission checks.
+10. The system shall ensure users keep the same access rights after the refactoring.
+11. The system shall remove or reduce unrelated permission grouping inside Right.java.
+12. The system shall allow future permissions to be added to the correct enum based on subsystem.
+
+Non-Functional Requirements
+
+1. The code shall be easier to read and understand.
+2. The code shall be easier to maintain and extend.
+3. The refactoring shall not introduce security regressions.
+4. The change shall not negatively affect system performance.
+5. The code shall follow the existing UniTime coding style.
+6. The new enums shall have clear and meaningful names.
+7. The implementation shall minimize duplicated code.
+
+Testing Requirements
+
+1. Existing permission tests shall continue to pass.
+2. New tests shall verify course permissions using CourseRight.
+3. New tests shall verify event permissions using EventRight.
+4. New tests shall verify room permissions using RoomRight.
+5. Regression tests shall confirm that old permission behavior remains unchanged.
+6. Tests shall check that unauthorized users are still denied access.
+7. Tests shall check that authorized users still have correct access.
+
+Constraints
+
+1. The change shall be limited to the Security Rights subsystem where possible.
+2. Existing user roles and permissions shall not be changed.
+3. Database permission values shall remain compatible unless migration is explicitly required.
+4. The refactoring shall not break existing APIs or UI behavior.
